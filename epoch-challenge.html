@@ -355,12 +355,19 @@
     }
 
     apply(x) {
+      // Log function = m*log(x) + b
+      
+      // b = minimum_position_graph_axis
       let minimum_position_graph_axis = this.range[0];
-      let calculated_logarithm_input_value = Math.log10(x);
+      // m = output_interval
       let output_interval = this.range[1] - this.range[0];
+      // log(x) = input_value_normalizated
+      let input_value_logarithm = Math.log10(x);
       let domain_minimum_value_logarithm = Math.log10(this.domain[0]);
       let domain_range_normalized = Math.log10(this.domain[1]) - Math.log10(this.domain[0]);
-      return minimum_position_graph_axis + (calculated_logarithm_input_value - domain_minimum_value_logarithm)/domain_range_normalized * output_interval;
+      let input_value_normalized = (input_value_logarithm - domain_minimum_value_logarithm)/domain_range_normalized;
+
+      return output_interval*input_value_normalized + minimum_position_graph_axis;
     }
   }
 
